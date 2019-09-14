@@ -1,0 +1,54 @@
+server:
+  # 默认服务端口
+  port: 80
+  tomcat:
+    uri-encoding: utf-8
+
+# Spring配置
+spring:
+  # 静态资源
+  resources:
+    static-locations: classpath:/static
+  thymeleaf:
+    mode: LEGACYHTML5
+    # 禁用缓存，即时刷新
+    cache: false
+    # 路径
+    prefix: classpath:/templates/
+
+  # 配置数据源
+  datasource:
+    # 数据库连接池类型
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 数据库驱动类型
+    driverClassName: com.mysql.jdbc.Driver
+    # Mysql
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+    # 账号
+    username: root
+    # 密码
+    password: root
+    initialSize: 1
+    # 最小连接数
+    minIdle: 3
+    # 最大活跃连接数
+    maxActive: 20
+    # 超时等待时间
+    maxWait: 60000
+    # 检测间隔时间，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 指定一个空闲连接空闲多久之后可以被清除，单位是毫秒
+    minEvictableIdleTimeMillis: 30000
+    # 测试 SQL
+    validationQuery: select 'x'
+    # 当连接空闲时，是否执行连接测试
+    testWhileIdle: true
+    # 当从连接池借用连接时，是否测试该连接
+    testOnBorrow: false
+    # 归还连接到连接池时，是否测试该连接
+    testOnReturn: false
+
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,slf4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
